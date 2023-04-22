@@ -1,31 +1,34 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
+// Selecting elements
+const header = document.querySelector('.header');
+const allSections = document.querySelectorAll('.section');
 
-const modal = document.querySelector('.modal');
-const overlay = document.querySelector('.overlay');
-const btnCloseModal = document.querySelector('.btn--close-modal');
-const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+console.log(allSections);
 
-const openModal = function () {
-  modal.classList.remove('hidden');
-  overlay.classList.remove('hidden');
-};
+document.getElementById('section--1');
+const allBtns = document.getElementsByTagName('button');
+console.log(allBtns);
 
-const closeModal = function () {
-  modal.classList.add('hidden');
-  overlay.classList.add('hidden');
-};
+console.log(document.getElementsByClassName('btn'));
 
-for (let i = 0; i < btnsOpenModal.length; i++)
-  btnsOpenModal[i].addEventListener('click', openModal);
+// Creating and inserting elements
+const message = document.createElement('div');
+message.classList.add('cookie-message');
+//message.textContent = 'We use cookis for improved functionality and analytics.';
+message.innerHTML = `
+We use cookis for improved functionality and analytics.
+<button class='btn btn--close--cookie'>Got it!</button>
+`;
 
-btnCloseModal.addEventListener('click', closeModal);
-overlay.addEventListener('click', closeModal);
+//header.prepend(message);
+header.append(message);
+//header.append(message.cloneNode(true));
 
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-    closeModal();
-  }
-});
+header.before(message);
+header.after(message);
+
+// Delete elements
+document
+  .querySelector('.btn--close--cookie')
+  .addEventListener('click', () => message.remove());
