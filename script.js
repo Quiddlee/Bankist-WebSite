@@ -39,9 +39,11 @@ message.innerHTML = `
 We use cookis for improved functionality and analytics.
 <button class='btn btn--close--cookie'>Got it!</button>
 `;
+
 message.style.backgroundColor = '#37383d';
 message.style.width = '100vw';
 header.append(message);
+message.style.height = `${ Number.parseFloat(getComputedStyle(message).height) + 40 }px`;
 document
   .querySelector('.btn--close--cookie')
   .addEventListener('click', () => message.remove());
