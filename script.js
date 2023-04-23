@@ -30,8 +30,9 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
+///////////////////////////////////////
+// Cookie message
 
-// Selecting elements
 const header = document.querySelector('.header');
 const message = document.createElement('div');
 message.classList.add('cookie-message');
@@ -48,7 +49,21 @@ document
   .querySelector('.btn--close--cookie')
   .addEventListener('click', () => message.remove());
 
+
+///////////////////////////////////////
+// Anchors scroll
+
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
 
 btnScrollTo.addEventListener('click', () => section1.scrollIntoView({ behavior: 'smooth' }));
+
+document.querySelector('.nav__links').addEventListener('click', evt => {
+  evt.preventDefault();
+
+  const target = evt.target;
+  if (!target.classList.contains('nav__link')) return;
+
+  const id = target.getAttribute('href');
+  document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+});
