@@ -47,3 +47,8 @@ message.style.height = `${ Number.parseFloat(getComputedStyle(message).height) +
 document
   .querySelector('.btn--close--cookie')
   .addEventListener('click', () => message.remove());
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', () => section1.scrollIntoView({ behavior: 'smooth' }));
