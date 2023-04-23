@@ -88,3 +88,20 @@ tabsContainer.addEventListener('click', evt => {
   tabs.forEach(tab => tab.classList.remove('operations__tab--active'));
   target.classList.add('operations__tab--active');
 });
+
+///////////////////////////////////////
+// Menu fade animation
+
+const nav = document.querySelector('.nav');
+const links = [ ...nav.querySelectorAll('.nav__link'), nav.querySelector('.nav__logo') ];
+
+nav.addEventListener('mouseover', evt => {
+  const target = evt.target;
+  if (!target.classList.contains('nav__link')) return;
+
+  links.forEach(link => {
+    if (link !== target) link.style.opacity = '0.5';
+  });
+});
+
+nav.addEventListener('mouseout', () => links.forEach(link => link.style.opacity = '1'));
