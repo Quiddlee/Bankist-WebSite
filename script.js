@@ -105,3 +105,42 @@ nav.addEventListener('mouseover', evt => {
 });
 
 nav.addEventListener('mouseout', () => links.forEach(link => link.style.opacity = '1'));
+
+///////////////////////////////////////
+// Sticky navigation
+const navHeight = nav.getBoundingClientRect().height;
+console.log(navHeight);
+
+const stickyNav = entries => {
+  const [ entry ] = entries;
+  let timeoutId;
+
+  if (!entry.isIntersecting) {
+    nav.classList.add('sticky');
+    nav.animate([
+      { translate: `0 -${ navHeight }px` },
+      { translate: `0 0`, height: `${ navHeight + 10 }px` },
+      { height: `${ navHeight - 5 }px` },
+      { height: `${ navHeight }px` }
+    ], {
+      duration: 500
+    });
+  } else {
+    timeoutId && clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => nav.classList.remove('sticky'), 200);
+    nav.animate([
+      { translate: `0 0`, height: `${ navHeight }px` },
+      { translate: `0 0`, height: `${ navHeight + 30 }px` },
+      { translate: `0 -${ navHeight }px` }
+    ], {
+      duration: 200
+    });
+  }
+};
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${ navHeight }px`
+});
+headerObserver.observe(header);
