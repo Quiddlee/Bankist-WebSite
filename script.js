@@ -108,12 +108,12 @@ nav.addEventListener('mouseout', () => links.forEach(link => link.style.opacity 
 
 ///////////////////////////////////////
 // Sticky navigation
+
 const navHeight = nav.getBoundingClientRect().height;
-console.log(navHeight);
+let timeoutId;
 
 const stickyNav = entries => {
   const [ entry ] = entries;
-  let timeoutId;
 
   if (!entry.isIntersecting) {
     nav.classList.add('sticky');
@@ -127,13 +127,13 @@ const stickyNav = entries => {
     });
   } else {
     timeoutId && clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => nav.classList.remove('sticky'), 200);
+    timeoutId = setTimeout(() => nav.classList.remove('sticky'), 100);
     nav.animate([
       { translate: `0 0`, height: `${ navHeight }px` },
       { translate: `0 0`, height: `${ navHeight + 30 }px` },
       { translate: `0 -${ navHeight }px` }
     ], {
-      duration: 200
+      duration: 100
     });
   }
 };
