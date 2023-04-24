@@ -167,3 +167,29 @@ allSections.forEach(section => {
   section.classList.add('section--hidden');
   sectionObserver.observe(section);
 });
+
+///////////////////////////////////////
+// Lazy loading images
+
+const loadImg = (entries) => {
+  const [ entry ] = entries;
+  if (!entry.isIntersecting) return;
+  
+  const img = entry.target;
+
+  img.src = img.dataset.src;
+  img.addEventListener('load', function() {
+    this.classList.remove('lazy-img');
+  });
+
+  imgObserver.unobserve(img);
+};
+
+const imgTargets = document.querySelectorAll('img[data-src]');
+const imgObserver = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0,
+  rootMargin: '-200px'
+});
+
+imgTargets.forEach(img => imgObserver.observe(img));
